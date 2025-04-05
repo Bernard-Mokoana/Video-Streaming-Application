@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dotenv  from 'dotenv';
+import { store } from '../app/store.js';
 
 dotenv.config({
     path: "./.env"
