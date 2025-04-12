@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../../api/api';
 
-// Async Thunk for login
+
 export const loginUser = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await API.post('/auth/login', { email, password });
-      return response.data; // { user, token }
+      return response.data; 
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || 'Login failed');
     }
   }
 );
 
-// Async Thunk for fetching current user
+
 export const fetchCurrentUser = createAsyncThunk(
   'auth/fetchCurrentUser',
   async (_, { getState, rejectWithValue }) => {
@@ -34,7 +34,7 @@ const initialState = {
   user: null,
   token: null,
   isAuthenticated: false,
-  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  status: 'idle', 
   error: null
 };
 
@@ -42,21 +42,21 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // Synchronous logout action
+   
     logout: (state) => {
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
       state.status = 'idle';
     },
-    // Clear errors manually
+  
     clearError: (state) => {
       state.error = null;
     }
   },
   extraReducers: (builder) => {
     builder
-      // Login cases
+    
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading';
       })
@@ -71,7 +71,7 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       
-      // Current user cases
+      
       .addCase(fetchCurrentUser.pending, (state) => {
         state.status = 'loading';
       })
@@ -89,7 +89,7 @@ const authSlice = createSlice({
 
 export const { logout, clearError } = authSlice.actions;
 
-// Selectors
+
 export const selectCurrentUser = (state) => state.auth.user;
 export const selectAuthToken = (state) => state.auth.token;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
