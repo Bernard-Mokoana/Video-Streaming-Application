@@ -1,5 +1,5 @@
-import { createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
-import API from "../../api/api.js";
+import { createSlice, createEntityAdapter} from "@reduxjs/toolkit";
+import { fetchVidoes, uploadVideo } from "./videoService";
 
 const videosAdapter = createEntityAdapter({
     selectId: (video) => video._id,
@@ -7,34 +7,7 @@ const videosAdapter = createEntityAdapter({
 });
 
 
-export const fetchVidoes = createAsyncThunk(
-    'videos/fetchAll',
-    async (_,  {rejectWithValue }) => {
-
-try {
-    const response = await API.get('/videos');
-    return response.data;
-} catch (error) {
-    return rejectWithValue(error.response?.data?.message || 'Failed to laod videos');
-}  
- });
-
- export const uploadVideo = createAsyncThunk(
-    'videos/upload',
-    async (formData, { rejectWithValue }) => {
-        try {
-            const response = await API.post('/videos', formData, {
-                headers: {
-                    'content-Type': 'multipart/form-data'
-                }
-            });
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.message || "Upload failed");
-        }
-    });
-
-    const initialState = videosAdapter.getInitialState({
+const initialState = videosAdapter.getInitialState({
         status: 'idle',
         error: null,
         currentVideo: null
