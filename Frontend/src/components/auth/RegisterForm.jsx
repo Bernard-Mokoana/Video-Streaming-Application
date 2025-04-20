@@ -1,19 +1,24 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "./authSlice.js";
-import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline";
+import { registerUser } from "./authSlice.js";
+import {
+  EnvelopeIcon,
+  LockClosedIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
   const { status, error: apiError } = useSelector((state) => state.auth);
 
   const onSubmit = (data) => {
-    dispatch(loginUser(data));
+    dispatch(registerUser(data));
   };
 
   return (
@@ -22,18 +27,18 @@ export default function LoginForm() {
         {/* Logo and Header */}
         <div className="text-center">
           <div className="mx-auto h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center">
-            <LockClosedIcon className="h-6 w-6 text-white" />
+            <UserIcon className="h-6 w-6 text-white" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-white">
-            Sign in to your account
+            Create your account
           </h2>
           <p className="mt-2 text-sm text-gray-400">
-            Or{" "}
+            Already have an account?{" "}
             <a
               href="#"
               className="font-medium text-blue-400 hover:text-blue-300"
             >
-              create a new account
+              Sign in
             </a>
           </p>
         </div>
@@ -41,9 +46,45 @@ export default function LoginForm() {
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
           <div className="space-y-4 rounded-md">
+            {/* Username Field */}
             <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Username
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <UserIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="username"
+                  {...register("username", {
+                    required: "Username is required",
+                    minLength: {
+                      value: 3,
+                      message: "Username must be at least 3 characters",
+                    },
+                  })}
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-600 rounded-lg bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
+                  placeholder="videotuber123"
+                />
+              </div>
+              {errors.username && (
+                <p className="mt-2 text-sm text-red-400">
+                  {errors.username.message}
+                </p>
+              )}
+            </div>
+
+            {/* Email Field */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Email
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -60,7 +101,7 @@ export default function LoginForm() {
                   })}
                   type="email"
                   className="block w-full pl-10 pr-3 py-3 border border-gray-600 rounded-lg bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="you@example.com"
                 />
               </div>
               {errors.email && (
@@ -69,8 +110,13 @@ export default function LoginForm() {
                 </p>
               )}
             </div>
+
+            {/* Password Field */}
             <div>
-              <label htmlFor="password" className="sr-only">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
                 Password
               </label>
               <div className="relative">
@@ -88,7 +134,7 @@ export default function LoginForm() {
                   })}
                   type="password"
                   className="block w-full pl-10 pr-3 py-3 border border-gray-600 rounded-lg bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
-                  placeholder="Password"
+                  placeholder="••••••••"
                 />
               </div>
               {errors.password && (
@@ -97,34 +143,67 @@ export default function LoginForm() {
                 </p>
               )}
             </div>
-          </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-600 rounded bg-gray-700"
-              />
+            {/* Confirm Password Field */}
+            <div>
               <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-300"
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
-                Remember me
+                Confirm Password
               </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-blue-400 hover:text-blue-300"
-              >
-                Forgot your password?
-              </a>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <LockClosedIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="confirmPassword"
+                  {...register("confirmPassword", {
+                    required: "Please confirm your password",
+                    validate: (value) =>
+                      value === watch("password") || "Passwords don't match",
+                  })}
+                  type="password"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-600 rounded-lg bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
+                  placeholder="••••••••"
+                />
+              </div>
+              {errors.confirmPassword && (
+                <p className="mt-2 text-sm text-red-400">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
           </div>
 
+          {/* Terms Checkbox */}
+          <div className="flex items-start">
+            <div className="flex items-center h-5">
+              <input
+                id="terms"
+                {...register("terms", {
+                  required: "You must accept the terms and conditions",
+                })}
+                type="checkbox"
+                className="h-4 w-4 rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500"
+              />
+            </div>
+            <div className="ml-3 text-sm">
+              <label htmlFor="terms" className="font-medium text-gray-300">
+                I agree to the{" "}
+                <a href="#" className="text-blue-400 hover:text-blue-300">
+                  Terms and Conditions
+                </a>
+              </label>
+              {errors.terms && (
+                <p className="mt-2 text-sm text-red-400">
+                  {errors.terms.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* API Error Display */}
           {apiError && (
             <div className="p-4 rounded-lg bg-red-900 bg-opacity-50 border border-red-800">
               <p className="text-sm text-red-300">{apiError}</p>
@@ -161,14 +240,14 @@ export default function LoginForm() {
                       ></path>
                     </svg>
                   </span>
-                  Signing in...
+                  Creating account...
                 </>
               ) : (
                 <>
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                    <LockClosedIcon className="h-5 w-5 text-blue-400 group-hover:text-blue-300" />
+                    <UserIcon className="h-5 w-5 text-blue-400 group-hover:text-blue-300" />
                   </span>
-                  Sign in
+                  Register
                 </>
               )}
             </button>
@@ -182,7 +261,7 @@ export default function LoginForm() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-gray-800 text-gray-400">
-                Or continue with
+                Or sign up with
               </span>
             </div>
           </div>
@@ -193,7 +272,7 @@ export default function LoginForm() {
                 href="#"
                 className="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg shadow-sm bg-gray-700 text-sm font-medium text-gray-300 hover:bg-gray-600"
               >
-                <span className="sr-only">Sign in with Google</span>
+                <span className="sr-only">Sign up with Google</span>
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
@@ -209,7 +288,7 @@ export default function LoginForm() {
                 href="#"
                 className="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg shadow-sm bg-gray-700 text-sm font-medium text-gray-300 hover:bg-gray-600"
               >
-                <span className="sr-only">Sign in with Facebook</span>
+                <span className="sr-only">Sign up with Facebook</span>
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
@@ -229,7 +308,7 @@ export default function LoginForm() {
                 href="#"
                 className="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg shadow-sm bg-gray-700 text-sm font-medium text-gray-300 hover:bg-gray-600"
               >
-                <span className="sr-only">Sign in with GitHub</span>
+                <span className="sr-only">Sign up with GitHub</span>
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
