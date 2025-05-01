@@ -4,8 +4,8 @@ import { Box } from "@mui/material";
 import {
   Navbar,
   Feed,
-  ChannelDetail,
-  VideoDetail,
+  ChannelDetails,
+  VideoDetails,
   SearchFeed,
 } from "./components/index.js";
 function App() {
@@ -14,8 +14,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" exact element={<Feed />} />
-        <Route path="/video/:id" element={<VideoDetail />} />
-        <Route path="/channel/:id" exact element={<ChannelDetail />} />
+        <Route path="/video/:id" element={<VideoDetails />} />
+        <Route path="/channel/:id" exact element={<ChannelDetails />} />
         <Route path="/search/:searchTerm" exact element={<SearchFeed />} />
       </Routes>
     </Box>
