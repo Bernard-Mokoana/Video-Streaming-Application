@@ -9,17 +9,19 @@ import {
   SearchFeed,
 } from "./components/index.js";
 function App() {
-  <BrowserRouter>
-    <Box sx={{ background: "#000" }}>
-      <Navbar />
-      <Routes>
-        <Route path="/" exact element={<Feed />} />
-        <Route path="/video/:id" element={<VideoDetails />} />
-        <Route path="/channel/:id" exact element={<ChannelDetails />} />
-        <Route path="/search/:searchTerm" exact element={<SearchFeed />} />
-      </Routes>
-    </Box>
-  </BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <Box sx={{ background: "#0000" }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" exact element={<Feed />} />
+          <Route path="/video/:id" element={<VideoDetails />} />
+          <Route path="/channel/:id" exact element={<ChannelDetails />} />
+          <Route path="/search/:searchTerm" exact element={<SearchFeed />} />
+        </Routes>
+      </Box>
+    </BrowserRouter>
+  );
 }
 
 export default App;
