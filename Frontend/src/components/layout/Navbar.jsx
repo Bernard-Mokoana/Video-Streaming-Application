@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import { logo } from "../../utils/constants.jsx";
 import SearchBar from "./SearchBar.jsx";

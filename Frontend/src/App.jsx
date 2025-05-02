@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import {
   Navbar,
   Feed,
@@ -11,7 +11,7 @@ import {
 function App() {
   return (
     <BrowserRouter>
-      <Box sx={{ background: "#0000" }}>
+      <Box sx={{ background: "#000" }}>
         <Navbar />
         <Routes>
           <Route path="/" exact element={<Feed />} />
