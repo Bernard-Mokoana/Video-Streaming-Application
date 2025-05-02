@@ -4,3 +4,4 @@ export { default as ChannelDetails } from "./layout/ChannelDetails.jsx";
 export { default as VideoDetails } from "./layout/VideoDetails.jsx";
 export { default as SearchFeed } from "./layout/SearchFeed.jsx";
 export { default as SearchBar } from "./layout/SearchBar.jsx";
+export { default as SideBar } from "./layout/Sidebar.jsx";
