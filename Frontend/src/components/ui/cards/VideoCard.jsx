@@ -1,51 +1,61 @@
-import { useState } from "react";
-import { ClockIcon, EyeIcon } from "@heroicons/react/24/outline";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Typography, Card, CardContent, CardMedia } from "@mui/material";
+import { CheckCircle } from "@mui/icons-material";
 
-export default function VideoCard({ video }) {
-  const [isHovered, setIsHovered] = useState(false);
+import {
+  demoThumbnailUrl,
+  demoVideoUrl,
+  demoVideoTitle,
+  demoChannelUrl,
+  demoChannelTitle,
+} from "../../../utils/constants";
+
+function VideoCard({ video }) {
+  if (!video || !video.id) return null;
+
+  const { id, snippet } = video;
+  const videoId = id.videoId;
 
   return (
-    <div
-      className="w-full cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <Card
+      sx={{
+        width: { md: "320px", xs: "100%" },
+        boxShadow: "none",
+        borderRadius: 0,
+      }}
     >
-      {/* Thumbnail */}
-      <div className="relative aspect-video bg-youtube-dark-secondary rounded-xl overflow-hidden">
-        <img
-          src={video.thumbnail}
-          alt={video.title}
-          className={`w-full h-full object-cover transition-transform duration-300 ${
-            isHovered ? "scale-105" : ""
-          }`}
+      <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
+        <CardMedia
+          image={snippet?.thumbnails?.high?.url}
+          alt={snippet?.title}
+          sx={{ width: 358, height: 180 }}
         />
-        <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 px-1.5 py-0.5 rounded text-xs">
-          {video.duration}
-        </div>
-      </div>
+      </Link>
 
-      {/* Video Info */}
-      <div className="mt-3 flex space-x-3">
-        <div className="flex-shrink-0">
-          <div className="w-9 h-9 rounded-full bg-youtube-dark-secondary"></div>
-        </div>
-        <div className="overflow-hidden">
-          <h3 className="text-youtube-text-primary font-medium line-clamp-2">
-            {video.title}
-          </h3>
-          <p className="text-youtube-text-secondary text-sm mt-1">
-            {video.channel}
-          </p>
-          <div className="flex items-center text-youtube-text-secondary text-xs space-x-2 mt-1">
-            <span className="flex items-center">
-              <EyeIcon className="h-3 w-3 mr-1" /> {video.views}
-            </span>
-            <span className="flex items-center">
-              <ClockIcon className="h-3 w-3 mr-1" /> {video.uploaded}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+      <CardContent sx={{ backgroundColor: "1e1e1e", height: "106px" }}>
+        <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
+          <Typography variant="subtitle1" fontWeight="bold" color="#fff">
+            {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
+          </Typography>
+        </Link>
+
+        <Link
+          to={
+            snippet.channelId
+              ? `/channel/${snippet?.channelId}`
+              : demoChannelUrl
+          }
+        >
+          <Typography variant="subtitle2" fontWeight="bold" color="gray">
+            {snippet?.channelTitle.slice(0, 60) ||
+              demoChannelTitle.slice(0, 60)}
+            <CheckCircle sx={{ fontSize: 12, color: "gray", ml: "5px" }} />
+          </Typography>
+        </Link>
+      </CardContent>
+    </Card>
   );
 }
+
+export default VideoCard;

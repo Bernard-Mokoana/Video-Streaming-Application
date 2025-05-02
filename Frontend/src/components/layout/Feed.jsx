@@ -2,7 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Video from "./Video";
+import { fetchFromAPI } from "../../utils/fetchFromAPI.js";
 function Feed() {
+  const [selectedCategory, setSelectedCategory] = useState("New");
+  const [videos, setVideos] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadVideos = async () => {
+      try {
+        const data = await fetchFromAPI(
+          `search?part=snippet&=${selectedCategory}`
+        );
+        setVideos(data.items || []);
+        setError(null);
+      } catch (error) {
+        console.log("Failed to load videos", error);
+        setError("Failed to load videos. Please try again later.");
+      }
+    };
+
+    loadVideos();
+  }, [selectedCategory]);
+
+  // if (error) return <div className="error">{error}</div>;
+  // if (!videos.length) return <div>Loading videos...</div>;
+
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
@@ -12,7 +37,10 @@ function Feed() {
           px: { sx: 0, md: 2 },
         }}
       >
-        <Sidebar />
+        <Sidebar
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
 
         <Typography
           className="copyright"
@@ -30,10 +58,10 @@ function Feed() {
           mb={2}
           sx={{ color: "white" }}
         >
-          New <span style={{ color: "#fff" }}>Videos</span>
+          {selectedCategory} <span style={{ color: "#fff" }}>Videos</span>
         </Typography>
 
-        <Video videos={[]} />
+        <Video videos={[videos]} />
       </Box>
     </Stack>
   );
