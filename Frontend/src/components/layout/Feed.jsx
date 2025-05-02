@@ -21,6 +21,19 @@ function Feed() {
           Copyright 2025 NonchalantTech
         </Typography>
       </Box>
+
+      <Box p={2} sx={{ overflow: "auto", height: "90vh", flex: 2 }}>
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          mb={2}
+          sx={{ color: "white" }}
+        >
+          New <span style={{ color: "#fff" }}>Videos</span>
+        </Typography>
+
+        <Video />
+      </Box>
     </Stack>
   );
 }
