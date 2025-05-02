@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
+import Video from "./Video";
 function Feed() {
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
@@ -32,7 +33,7 @@ function Feed() {
           New <span style={{ color: "#fff" }}>Videos</span>
         </Typography>
 
-        <Video />
+        <Video videos={[]} />
       </Box>
     </Stack>
   );
