@@ -1,88 +1,41 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import API from "../../api/api.js";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const response = await API.login(credentials);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
-    }
-  }
-);
-
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (userData, { rejectWithValue }) => {
-    try {
-      const response = await API.register(userData);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
-    }
-  }
-);
+const initialState = {
+  user: null,
+  token: localStorage.getItem("token"),
+  isAuthenticated: false,
+  loading: false,
+  error: null,
+};
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    isOpen: false,
-    activeTab: "login",
-    status: "idle",
-    error: null,
-    user: null,
-  },
+  initialState,
   reducers: {
-    openAuthModal: (state, { payload }) => {
-      state.isOpen = true;
-      state.activeTab = payload || "login";
+    loginStart: (state) => {
+      state.loading = true;
       state.error = null;
     },
-    closeAuthModal: (state) => {
-      state.isOpen = false;
-      state.error = null;
+    loginSuccess: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      localStorage.setItem("token", action.payload.token);
     },
-    switchTab: (state, { payload }) => {
-      state.activeTab = payload;
-      state.error = null;
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
     logout: (state) => {
       state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
+      localStorage.removeItem("token");
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(loginUser.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, { payload }) => {
-        state.status = "succeeded";
-        state.user = payload.user;
-        state.isOpen = false;
-      })
-      .addCase(loginUser.rejected, (state, { payload }) => {
-        state.status = "failed";
-        state.error = payload?.message || "Login failed";
-      })
-      .addCase(registerUser.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      .addCase(registerUser.fulfilled, (state, { payload }) => {
-        state.status = "succeeded";
-        state.user = payload.user;
-        state.activeTab = "login";
-      })
-      .addCase(registerUser.rejected, (state, { payload }) => {
-        state.status = "failed";
-        state.error = payload?.message || "Registration failed";
-      });
   },
 });
 
-export const { openAuthModal, closeAuthModal, switchTab, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout } =
   authSlice.actions;
 export const authReducer = authSlice.reducer;
