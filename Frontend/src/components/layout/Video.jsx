@@ -1,7 +1,15 @@
 import React from "react";
-import { Stack, Box } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import VideoCard from "../ui/cards/VideoCard";
-import ChannelCard from "../ui/cards/ChannelCard";
+import Avatar from "@mui/material/Avatar";
+
+const fadeInStyle = {
+  animation: "fadeIn 0.7s ease",
+  "@keyframes fadeIn": {
+    from: { opacity: 0, transform: "translateY(20px)" },
+    to: { opacity: 1, transform: "none" },
+  },
+};
 
 const Video = ({ videos }) => {
   if (!videos || !Array.isArray(videos)) {
@@ -9,18 +17,46 @@ const Video = ({ videos }) => {
   }
 
   return (
-    <div>
-      <Stack direction="row" flexWrap="wrap" justifyContent="start" gap={2}>
+    <Box sx={{ width: "100%" }}>
+      <Grid container spacing={4}>
         {videos.map((item, idx) => (
-          <Box key={idx}>
-            {item && item.id && item.id.videoId && <VideoCard video={item} />}
-            {item && item.id && item.id.videoId && (
-              <ChannelCard channelDetails={item} />
-            )}
-          </Box>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            key={item.id || idx}
+            sx={fadeInStyle}
+          >
+            <Box
+              sx={{
+                transition:
+                  "transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s",
+                "&:hover": {
+                  transform: "scale(1.04)",
+                  boxShadow: 6,
+                },
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <VideoCard video={item} />
+              <Avatar
+                src={
+                  item.safeChannel.avatarUrl &&
+                  item.safeChannel.avatarUrl.startsWith("http")
+                    ? item.safeChannel.avatarUrl
+                    : "/default-avatar.png"
+                }
+                alt={item.safeChannel.name}
+              />
+            </Box>
+          </Grid>
         ))}
-      </Stack>
-    </div>
+      </Grid>
+    </Box>
   );
 };
 

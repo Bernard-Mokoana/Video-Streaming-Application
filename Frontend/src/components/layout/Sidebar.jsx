@@ -49,87 +49,106 @@ const Sidebar = () => {
       sx={{
         width: 240,
         minHeight: "100vh",
-        background: "linear-gradient(180deg, #f8fafc 0%, #e0e7ef 100%)",
-        borderRight: 1,
-        borderColor: "divider",
-        py: 2,
-        px: 1,
+        background: "linear-gradient(180deg, #6366f1 0%, #a21caf 100%)",
+        borderRight: 0,
+        py: 3,
+        px: 2,
         position: "fixed",
         top: 64, // height of navbar
         left: 0,
-        zIndex: 100,
-        boxShadow: 2,
+        zIndex: 1200,
+        boxShadow: 6,
+        animation: "slideInSidebar 0.7s cubic-bezier(.4,2,.6,1)",
+        "@keyframes slideInSidebar": {
+          from: { transform: "translateX(-100%)", opacity: 0 },
+          to: { transform: "none", opacity: 1 },
+        },
       }}
     >
       <Typography
-        variant="h6"
+        variant="h5"
         sx={{
-          fontWeight: 700,
-          letterSpacing: 1,
-          color: "primary.main",
-          mb: 2,
-          ml: 2,
+          fontWeight: 900,
+          letterSpacing: 2,
+          color: "#fff",
+          mb: 3,
+          ml: 1,
+          textShadow: "0 2px 8px rgba(0,0,0,0.15)",
         }}
       >
         Menu
       </Typography>
       <List>
-        {sidebarItems.map((item) => (
-          <Tooltip title={item.label} placement="right" key={item.label}>
-            <ListItemButton
-              selected={location.pathname === item.path}
-              onClick={() => navigate(item.path)}
-              sx={{
-                borderRadius: 2,
-                mb: 0.5,
-                color:
-                  location.pathname === item.path
-                    ? "primary.main"
-                    : "text.primary",
-                background:
-                  location.pathname === item.path
-                    ? "linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%)"
-                    : "transparent",
-                "&:hover": {
-                  background: "rgba(99,102,241,0.08)",
-                },
-              }}
-            >
-              <ListItemIcon
+        {sidebarItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Tooltip title={item.label} placement="right" key={item.label}>
+              <ListItemButton
+                selected={isActive}
+                onClick={() => navigate(item.path)}
                 sx={{
-                  color: location.pathname === item.path ? "#fff" : "inherit",
-                  minWidth: 36,
+                  borderRadius: 3,
+                  mb: 0.5,
+                  color: isActive ? "#fff" : "#e0e7ef",
+                  background: isActive
+                    ? "linear-gradient(90deg, #6366f1 0%, #a21caf 100%)"
+                    : "transparent",
+                  boxShadow: isActive ? "0 2px 12px 0 #a21caf44" : "none",
+                  borderLeft: isActive
+                    ? "5px solid #fff"
+                    : "5px solid transparent",
+                  transition: "all 0.25s cubic-bezier(.4,2,.6,1)",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(90deg, #6366f1 0%, #a21caf 100%)",
+                    color: "#fff",
+                    transform: "translateX(4px) scale(1.03)",
+                  },
                 }}
               >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.label}
-                primaryTypographyProps={{
-                  fontWeight: location.pathname === item.path ? 700 : 500,
-                  color: location.pathname === item.path ? "#fff" : "inherit",
-                }}
-              />
-            </ListItemButton>
-          </Tooltip>
-        ))}
+                <ListItemIcon
+                  sx={{
+                    color: isActive ? "#fff" : "#e0e7ef",
+                    minWidth: 36,
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.label}
+                  primaryTypographyProps={{
+                    fontWeight: isActive ? 800 : 500,
+                    color: isActive ? "#fff" : "#e0e7ef",
+                  }}
+                />
+              </ListItemButton>
+            </Tooltip>
+          );
+        })}
       </List>
-      <Divider sx={{ my: 2 }} />
+      <Divider sx={{ my: 2, borderColor: "#fff2" }} />
       <List>
         {secondaryItems.map((item) => (
           <Tooltip title={item.label} placement="right" key={item.label}>
             <ListItemButton
               onClick={() => navigate(item.path)}
               sx={{
-                borderRadius: 2,
+                borderRadius: 3,
                 mb: 0.5,
-                color: "text.secondary",
+                color: "#e0e7ef",
+                background: "transparent",
                 "&:hover": {
-                  background: "rgba(99,102,241,0.08)",
+                  background:
+                    "linear-gradient(90deg, #6366f1 0%, #a21caf 100%)",
+                  color: "#fff",
+                  transform: "translateX(4px) scale(1.03)",
                 },
+                transition: "all 0.25s cubic-bezier(.4,2,.6,1)",
               }}
             >
-              <ListItemIcon sx={{ minWidth: 36 }}>{item.icon}</ListItemIcon>
+              <ListItemIcon sx={{ minWidth: 36, color: "#e0e7ef" }}>
+                {item.icon}
+              </ListItemIcon>
               <ListItemText primary={item.label} />
             </ListItemButton>
           </Tooltip>

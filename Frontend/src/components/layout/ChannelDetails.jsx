@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Box, Container, Typography, CircularProgress } from "@mui/material";
 import Videos from "./Video.jsx";
 import ChannelCard from "../ui/cards/ChannelCard.jsx";
-import { fetchFromAPI } from "../../utils/fetchFromAPI.js";
+import { videoAPI, channelAPI } from "../../api/endpoints";
 
 function ChannelDetails() {
   const [channelDetail, setChannelDetail] = useState(null);
@@ -18,9 +18,7 @@ function ChannelDetails() {
       setError(null);
 
       try {
-        const channelData = await fetchFromAPI(
-          `channels?part=snippet,statistics&id=${id}`
-        );
+        const channelData = await channelAPI.getChannel(id);
 
         if (channelData?.items?.length > 0) {
           setChannelDetail(channelData.items[0]);
@@ -28,9 +26,7 @@ function ChannelDetails() {
           throw new Error("Channel not found");
         }
 
-        const videoData = await fetchFromAPI(
-          `search?channelId=${id}part=snippet,id&order=date&maxResults=50`
-        );
+        const videoData = await videoAPI.getVideosByChannelId(id);
 
         setVideos(videoData?.items || []);
       } catch (err) {

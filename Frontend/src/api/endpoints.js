@@ -14,6 +14,7 @@ export const videoAPI = {
   createVideo: (videoData) => API.post("/videos", videoData),
   updateVideo: (id, videoData) => API.put(`/videos/${id}`, videoData),
   deleteVideo: (id) => API.delete(`/videos/${id}`),
+  getVideosByChannelId: (channelId) => API.get(`/videos/channel/${channelId}`),
 };
 
 // Channel endpoints
@@ -26,3 +27,10 @@ export const channelAPI = {
 export const searchAPI = {
   search: (query) => API.get(`/search?q=${query}`),
 };
+
+// Videos
+export const getAllVideos = (params) => API.get("/videos", { params });
+export const getVideoById = (id) => API.get(`/videos/${id}`);
+// Add more as needed
+
+// Auth, Channels, etc. can go here too

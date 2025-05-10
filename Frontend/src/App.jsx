@@ -9,6 +9,7 @@ import {
   ChannelDetails,
   VideoDetails,
   SearchFeed,
+  SideBar,
 } from "./components/index.js";
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Box className="bg-gray-700">
           <Navbar />
+          <SideBar />
           <Routes>
             <Route path="/" exact element={<Feed />} />
             <Route path="/video/:id" element={<VideoDetails />} />
