@@ -144,9 +144,21 @@ const Navbar = () => {
           ) : (
             <Button
               variant="contained"
-              onClick={() => navigate("/login")}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-2 rounded-full font-medium"
-              startIcon={<AccountCircle />}
+              color="primary"
+              onClick={() => navigate("/signin")}
+              sx={{
+                borderRadius: 2,
+                textTransform: "none",
+                px: 3,
+                py: 1,
+                background: "linear-gradient(90deg, #6366f1 0%, #a21caf 100%)",
+                boxShadow: "0 4px 14px 0 rgba(0,118,255,0.39)",
+                "&:hover": {
+                  background:
+                    "linear-gradient(90deg, #4f46e5 0%, #7e22ce 100%)",
+                  boxShadow: "0 6px 20px rgba(0,118,255,0.23)",
+                },
+              }}
             >
               Sign In
             </Button>

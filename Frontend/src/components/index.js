@@ -10,3 +10,4 @@ export { default as VideoCard } from "./ui/cards/VideoCard.jsx";
 export { default as ChannelCard } from "./ui/cards/VideoCard.jsx";
 export { default as Login } from "./auth/Login";
 export { default as Register } from "./auth/Register";
+export { default as Sidebar } from "./layout/Sidebar.jsx";

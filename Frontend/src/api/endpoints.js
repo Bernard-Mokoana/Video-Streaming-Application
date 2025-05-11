@@ -31,6 +31,3 @@ export const searchAPI = {
 // Videos
 export const getAllVideos = (params) => API.get("/videos", { params });
 export const getVideoById = (id) => API.get(`/videos/${id}`);
-// Add more as needed
-
-// Auth, Channels, etc. can go here too

@@ -11,6 +11,7 @@ import {
   SearchFeed,
   SideBar,
 } from "./components/index.js";
+
 function App() {
   return (
     <Provider store={store}>
