@@ -16,7 +16,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Box className="bg-gray-700">
+        <Box>
           <Navbar />
           <SideBar />
           <Routes>

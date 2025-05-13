@@ -8,17 +8,14 @@ import {
   Box,
   Avatar,
   Tooltip,
+  Chip,
 } from "@mui/material";
-import { CheckCircle, MoreVert } from "@mui/icons-material";
+import { CheckCircle } from "@mui/icons-material";
 
 const formatViews = (views) => {
   if (views >= 1000000) return `${(views / 1000000).toFixed(1)}M`;
   if (views >= 1000) return `${(views / 1000).toFixed(1)}K`;
   return views.toString();
-};
-
-const formatDuration = (duration) => {
-  return duration;
 };
 
 const formatTimeAgo = (dateString) => {
@@ -43,8 +40,16 @@ function VideoCard({ video }) {
     return null;
   }
 
-  const { id, title, thumbnailUrl, duration, views, createdAt, channel } =
-    video;
+  const {
+    id,
+    title,
+    thumbnailUrl,
+    duration,
+    views,
+    createdAt,
+    category,
+    channel,
+  } = video;
 
   // Fallback values for missing data
   const safeTitle = title || "Untitled Video";
@@ -56,7 +61,6 @@ function VideoCard({ video }) {
     id: "unknown",
     name: "Unknown Channel",
     avatarUrl: null,
-    verified: false,
   };
 
   return (
@@ -72,8 +76,15 @@ function VideoCard({ video }) {
           variant="caption"
           className="absolute bottom-2 right-2 bg-black bg-opacity-75 px-2 py-1 rounded text-white"
         >
-          {formatDuration(safeDuration)}
+          {safeDuration}
         </Typography>
+        {category && (
+          <Chip
+            label={category}
+            size="small"
+            className="absolute top-2 left-2 bg-black bg-opacity-75 text-white"
+          />
+        )}
       </Link>
 
       <CardContent className="p-3">
@@ -106,12 +117,7 @@ function VideoCard({ video }) {
                 >
                   {safeChannel.name}
                 </Typography>
-                {safeChannel.verified && (
-                  <CheckCircle
-                    className="text-blue-500"
-                    sx={{ fontSize: 14 }}
-                  />
-                )}
+                <CheckCircle className="text-blue-500" sx={{ fontSize: 14 }} />
               </Box>
             </Link>
 
