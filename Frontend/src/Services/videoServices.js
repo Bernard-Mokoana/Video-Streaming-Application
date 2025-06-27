@@ -4,9 +4,10 @@ const API_URL = import.meta.env.VITE_API_BASE_URL;
 export const getAllVideos = async () => {
   try {
     const response = await axios.get(`${API_URL}/videos`);
-    console.log(response);
+    return response.data;
   } catch (error) {
-    console.error(error.message);
+    console.error("Error fetching videos: ", error);
+    throw error;
   }
 };
 
