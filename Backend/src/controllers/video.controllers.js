@@ -153,7 +153,7 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
     if (!videoId) {
       throw new ApiError(
         404,
-        "Video not found or you not athorized to toggle publish status"
+        "Video not found or you not authorized to toggle publish status"
       );
     }
 
