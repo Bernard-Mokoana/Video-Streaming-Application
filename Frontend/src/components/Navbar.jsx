@@ -21,25 +21,24 @@ function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
                 >
                   Home
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/upload"
                   className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
                 >
-                  <Link></Link>
                   Upload
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/playlist"
                   className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
                 >
-                  Subscriptions
-                </a>
+                  Playlist
+                </Link>
 
                 {/* More Options Dropdown */}
                 <div className="relative">
@@ -53,30 +52,30 @@ function Navbar() {
 
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200">
-                      <a
-                        href="#"
+                      <Link
+                        to="/category"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       >
-                        Categories
-                      </a>
-                      <a
-                        href="#"
+                        Category
+                      </Link>
+                      <Link
+                        to="/subscription"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       >
-                        Playlists
-                      </a>
-                      <a
-                        href="#"
+                        Subscription
+                      </Link>
+                      <Link
+                        to="/history"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       >
                         History
-                      </a>
-                      <a
-                        href="#"
+                      </Link>
+                      <Link
+                        to="/settings"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       >
                         Settings
-                      </a>
+                      </Link>
                     </div>
                   )}
                 </div>
@@ -114,36 +113,48 @@ function Navbar() {
           {isMenuOpen && (
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">
-                <a
-                  href="#"
-                  className="text-grey-900 block px-3 py-2 text-base font-medium"
+                <Link
+                  to="/"
+                  className="block text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
                 >
                   Home
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-me"
+                </Link>
+                <Link
+                  to="/upload"
+                  className="block text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
                 >
                   Upload
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
+                </Link>
+                <Link
+                  to="/playlist"
+                  className="block text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
                 >
-                  Subscriptions
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
+                  Playlist
+                </Link>
+                <Link
+                  to="/category"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                 >
-                  Categories
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
+                  Category
+                </Link>
+                <Link
+                  to="/subscription"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                 >
-                  Playlists
-                </a>
+                  Subscription
+                </Link>
+                <Link
+                  to="/history"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                >
+                  History
+                </Link>
+                <Link
+                  to="/settings"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                >
+                  Settings
+                </Link>
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-center space-x-3">
                     <button className="text-gray-700 hover:text-gray-900 px-3 py-2 text-base font-medium">
