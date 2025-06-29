@@ -7,16 +7,17 @@ export const getAllVideos = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching videos: ", error);
-    throw error;
+    throw new error();
   }
 };
 
 export const getVideoById = async () => {
   try {
     const response = await axios.get(`${API_URL}/videos/${id}`);
-    console.log(response);
+    return response.data;
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching the user video: ", error);
+    throw new error();
   }
 };
 
@@ -29,9 +30,9 @@ export const uploadVideos = async (formData) => {
   }
 };
 
-export const updateVideo = async () => {
+export const updateVideo = async (formData) => {
   try {
-    const response = await axios.patch(`${API_URL}/videos/${id}`);
+    const response = await axios.patch(`${API_URL}/videos/${id}`, formData);
     console.log(response);
   } catch (error) {
     console.log(error);

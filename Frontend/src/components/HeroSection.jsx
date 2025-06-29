@@ -1,9 +1,15 @@
 import React from "react";
 import { Play, Search } from "lucide-react";
+import Navbar from "./Navbar";
 
-function LandingPage() {
+function HeroSection() {
+  const handleNavigation = (path) => {
+    window.location.href = path;
+  };
   return (
     <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen">
+      {/* Navbar */}
+      {/* <Navbar /> */}
       {/* Background Image overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
@@ -34,7 +40,10 @@ function LandingPage() {
 
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <button
+                onClick={() => handleNavigation("../Pages/Home.jsx")}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
                 <Play className="h-5 w-5" />
                 <span>Watch</span>
               </button>
@@ -122,4 +131,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default HeroSection;
