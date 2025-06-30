@@ -144,7 +144,6 @@ function VideoUpload() {
                   required
                 />
               </div>
-
               {/* Description Input */}
               <div className="space-y-2">
                 <label className="flex items-center text-white font-semibold text-lg mb-3">
@@ -160,7 +159,7 @@ function VideoUpload() {
                   required
                 />
               </div>
-
+              ``
               {/* Video Upload */}
               <div className="space-y-4">
                 <label className="flex items-center text-white font-semibold text-lg mb-3">
@@ -219,7 +218,6 @@ function VideoUpload() {
                   </div>
                 )}
               </div>
-
               {/* Thumbnail Upload */}
               <div className="space-y-4">
                 <label className="flex items-center text-white font-semibold text-lg mb-3">
@@ -266,7 +264,6 @@ function VideoUpload() {
                   </div>
                 )}
               </div>
-
               {/* Submit Button */}
               <div className="pt-6">
                 <button
