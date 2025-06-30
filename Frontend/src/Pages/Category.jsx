@@ -378,7 +378,7 @@ function Category() {
         }}
       ></div>
 
-      <div className="relative">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Navbar />
         {/* Header */}
         <div className="text-center mb-12">

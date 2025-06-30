@@ -16,8 +16,8 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HeroSection />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/hero" element={<HeroSection />} />
+          <Route path="/" element={<Home />} />
           <Route path="/watch/:id" element={<Watch />} />
 
           <Route path="/upload" element={<Upload />} />
