@@ -8,8 +8,6 @@ function HeroSection() {
   };
   return (
     <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen">
-      {/* Navbar */}
-      <Navbar />
       {/* Background Image overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
@@ -19,7 +17,9 @@ function HeroSection() {
         }}
       ></div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 \">
+        {/* Navbar */}
+        <Navbar />
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           {/* Left Content */}
           <div className="text-white space-y-8">

@@ -18,6 +18,7 @@ import {
   MoreVertical,
   Flame,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 // Mock categories data
 const categories = [
@@ -184,7 +185,8 @@ function Category() {
           }}
         ></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="relative">
+          <Navbar />
           {/* Back Button */}
           <button
             onClick={() => setSelectedCategory(null)}
@@ -376,7 +378,8 @@ function Category() {
         }}
       ></div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative">
+        <Navbar />
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
