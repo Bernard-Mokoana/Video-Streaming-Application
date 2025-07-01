@@ -18,7 +18,7 @@ function Navbar() {
               </h1>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu & Desktop button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-gray-900 p-2"
@@ -31,7 +31,7 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile & Desktop Navigation */}
           {isMenuOpen && (
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">
               <Link
