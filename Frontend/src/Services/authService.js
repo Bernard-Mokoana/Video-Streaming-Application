@@ -16,7 +16,19 @@ export const loginUser = async (user) => {
   }
 };
 
-export const registerUser = async () => {};
+export const registerUser = async (userData) => {
+  try {
+    const response = await axios.post(`${API_URL}/users/register`, userData);
+    console.log("Registration Successful", response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error?.response?.data?.message ||
+        error.message ||
+        "Registration failed. Please try again."
+    );
+  }
+};
 
 export const refreshAccessToken = async () => {};
 
