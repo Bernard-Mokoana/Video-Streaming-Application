@@ -10,6 +10,8 @@ import History from "./Pages/History.jsx";
 import NotFound from "./Pages/NotFound.jsx";
 import Settings from "./Pages/Settings.jsx";
 import HeroSection from "./components/HeroSection.jsx";
+import Login from "./Pages/Login.jsx";
+import Register from "./Pages/Register.jsx";
 
 function App() {
   return (
@@ -19,7 +21,6 @@ function App() {
           <Route path="/" element={<HeroSection />} />
           <Route path="/hero" element={<Home />} />
           <Route path="/watch/:id" element={<Watch />} />
-
           <Route path="/upload" element={<Upload />} />
           <Route path="/playlist" element={<Playlist />} />
           <Route path="/subscription" element={<Subscription />} />
@@ -27,6 +28,8 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/notfound" element={<NotFound />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>

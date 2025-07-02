@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, AlertCircle } from "lucide-react";
 import { loginUser } from "../Services/authService";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -40,6 +41,7 @@ function Login() {
     try {
       const response = await loginUser(formData);
       console.log("Login successful:", response.data);
+      navigate("/");
     } catch (error) {
       setError(error.message || "Login failed. Please try again.");
     } finally {
@@ -219,7 +221,7 @@ function Login() {
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
               <a
-                href="#"
+                href="/register"
                 className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
               >
                 Sign up here

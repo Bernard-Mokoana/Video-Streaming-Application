@@ -11,6 +11,7 @@ import {
   Camera,
 } from "lucide-react";
 import { registerUser } from "../Services/authService";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -27,6 +28,7 @@ function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,9 +105,10 @@ function Register() {
     try {
       const response = await registerUser(data);
       setSuccess(
-        "Registration successful! Please check your email to verify your account."
+        "Registration successful! You can now log in with your credentials."
       );
-      // Reset form
+      navigate("/login");
+
       setFormData({
         username: "",
         fullName: "",
@@ -115,7 +118,6 @@ function Register() {
       });
       setAvatar(null);
       setCoverImage(null);
-      Router.push("/login");
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");
       console.error("Registration error:", error);
@@ -406,7 +408,7 @@ function Register() {
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
               <a
-                href="#"
+                href="/login"
                 className="text-purple-600 hover:text-purple-800 font-medium transition-colors"
               >
                 Sign in here
