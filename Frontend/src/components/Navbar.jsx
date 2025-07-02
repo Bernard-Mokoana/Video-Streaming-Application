@@ -7,7 +7,7 @@ function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl mb-8">
+    <div className="bg-white rounded-2xl border border-white/20 shadow-2xl mb-8">
       <nav className="shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -27,7 +27,7 @@ function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search videos..."
-                  className="w-full pl-10 pr-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                  className="w-full pl-10 pr-3 py-2 bg-white/10 border-2 border-gray-400 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                 />
               </div>
             </div>
@@ -36,19 +36,19 @@ function Navbar() {
             <div className="hidden lg:flex items-center space-x-4">
               <a
                 href="/"
-                className="text-gray -900 hover:text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-white hover:text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Home
               </a>
               <a
                 href="/upload"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-white hover:text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Upload
               </a>
               <a
                 href="/playlist"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-white hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Playlist
               </a>
@@ -64,7 +64,7 @@ function Navbar() {
                 </button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                  <div className="absolute right-0 mt-2 w-48  bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                     <a
                       href="/category"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
@@ -95,14 +95,14 @@ function Navbar() {
             </div>
 
             {/* Desktop Auth Buttons - Hidden on mobile */}
-            <div className="hidden md:flex items-center space-x-3 ml-4">
+            {/* <div className="hidden md:flex items-center space-x-3 ml-4">
               <button className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">
                 Login
               </button>
               <button className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
                 Sign Up
               </button>
-            </div>
+            </div> */}
 
             {/* Mobile menu button */}
             <button

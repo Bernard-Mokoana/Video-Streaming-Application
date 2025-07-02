@@ -9,17 +9,16 @@ import Category from "./Pages/Category.jsx";
 import History from "./Pages/History.jsx";
 import NotFound from "./Pages/NotFound.jsx";
 import Settings from "./Pages/Settings.jsx";
-import HeroSection from "./components/HeroSection.jsx";
 import Login from "./Pages/Login.jsx";
 import Register from "./Pages/Register.jsx";
+import Videos from "./Pages/Videos.jsx";
 
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HeroSection />} />
-          <Route path="/hero" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/watch/:id" element={<Watch />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/playlist" element={<Playlist />} />
@@ -30,6 +29,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/videos" element={<Videos />} />
         </Routes>
       </BrowserRouter>
     </div>
