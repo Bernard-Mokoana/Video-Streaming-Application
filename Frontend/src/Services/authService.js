@@ -2,12 +2,17 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const loginUser = async () => {
+export const loginUser = async (user) => {
   try {
-    const response = await axios.post(`${API_URL}/users`, user);
+    const response = await axios.post(`${API_URL}/users/login`, user);
     console.log("Login Successful", response.data);
+    return response.data;
   } catch (error) {
-    console.log("Login failed ", error.message);
+    throw new Error(
+      error?.response?.data?.message ||
+        error.message ||
+        "Login failed. Please try again."
+    );
   }
 };
 

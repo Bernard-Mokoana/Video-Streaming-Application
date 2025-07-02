@@ -39,7 +39,7 @@ function Login() {
 
     try {
       const response = await loginUser(formData);
-      console.log("Login successful:", response);
+      console.log("Login successful:", response.data);
     } catch (error) {
       setError(error.message || "Login failed. Please try again.");
     } finally {
@@ -68,6 +68,7 @@ function Login() {
         {/* Login Form */}
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
           <div className="space-y-6">
+            {/* Error Message */}
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-2 text-red-700">
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
