@@ -23,10 +23,18 @@ export const getVideoById = async () => {
 
 export const uploadVideos = async (formData) => {
   try {
-    const response = await axios.post(`${API_URL}/videos`, formData);
-    console.log(response);
+    const response = await axios.post(`${API_URL}/videos/upload`, formData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log("Video uploaded successfully:", response.data);
+    return response.data;
   } catch (error) {
-    console.log(error);
+    throw new Error(
+      "Error uploading video: " + (error?.message || "Unknown error")
+    );
   }
 };
 
@@ -35,7 +43,7 @@ export const updateVideo = async (formData) => {
     const response = await axios.patch(`${API_URL}/videos/${id}`, formData);
     console.log(response);
   } catch (error) {
-    console.log(error);
+    console.log("Error updating video: ", error);
   }
 };
 

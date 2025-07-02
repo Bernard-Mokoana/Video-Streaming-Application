@@ -4,7 +4,12 @@ const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const loginUser = async (user) => {
   try {
-    const response = await axios.post(`${API_URL}/users/login`, user);
+    const response = await axios.post(`${API_URL}/users/login`, user, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     console.log("Login Successful", response.data);
     return response.data;
   } catch (error) {

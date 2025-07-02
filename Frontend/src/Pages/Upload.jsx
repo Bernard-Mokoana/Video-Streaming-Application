@@ -9,15 +9,7 @@ import {
   Check,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
-
-const uploadVideos = async (formData) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ success: true, id: Date.now() });
-    }, 2000);
-  });
-};
-
+import { uploadVideos } from "../Services/videoServices";
 function VideoUpload() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,7 +23,6 @@ function VideoUpload() {
     e.preventDefault();
     setIsUploading(true);
 
-    // Prepare the form data for upload
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -42,7 +33,6 @@ function VideoUpload() {
       const response = await uploadVideos(formData);
       console.log("video uploaded successfully:", response);
       setUploadSuccess(true);
-      // Reset form after successful upload
       setTimeout(() => {
         setTitle("");
         setDescription("");
@@ -87,7 +77,6 @@ function VideoUpload() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Background Pattern */}
       <div
         className="absolute inset-0 opacity-10"
         style={{
