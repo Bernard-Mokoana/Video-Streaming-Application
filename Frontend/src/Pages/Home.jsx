@@ -1,6 +1,7 @@
 import React from "react";
 import { Play, Search } from "lucide-react";
 import Navbar from "../components/Navbar.jsx";
+import LatestVideos from "../components/LatestVideos.jsx";
 
 function HeroSection() {
   const handleNavigation = (path) => {
@@ -126,6 +127,9 @@ function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Latest Videos */}
+      <LatestVideos />
     </div>
   );
 }
