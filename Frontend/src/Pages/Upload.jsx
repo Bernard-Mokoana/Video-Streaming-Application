@@ -26,8 +26,8 @@ function VideoUpload() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    if (video) formData.append("video", video);
-    if (thumbnail) formData.append("thumbnail", thumbnail);
+    if (video) formData.append("videoFile", video);
+    if (thumbnail) formData.append("thumbnailFile", thumbnail);
 
     try {
       const response = await uploadVideos(formData);

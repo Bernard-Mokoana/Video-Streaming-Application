@@ -7,17 +7,13 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import mongoose, { isValidObjectId } from "mongoose";
 
 const getAllVideos = asyncHandler(async (req, res) => {
-  try {
-    const videos = await Videos.find()
-      .populate("owner", "username avatar")
-      .sort({ createdAt: -1 });
-    res.status(200).json(videos);
-  } catch (error) {
-    console.error("Error in getAllVideos", error);
-    res
-      .status(500)
-      .json({ error: error?.message || "Error while fetching videos" });
-  }
+  const videos = await Videos.find()
+    .populate("owner", "username avatar")
+    .sort({ createdAt: -1 });
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, videos, "Videos fetched successfully"));
 });
 
 const publishAVideo = asyncHandler(async (req, res) => {
@@ -50,7 +46,6 @@ const publishAVideo = asyncHandler(async (req, res) => {
     description,
     videoFile: videoUploadResponse.url,
     thumbnailFile: thumbnailUploadResponse.url,
-    duration: videoUploadResponse.duration,
     owner: userId,
   });
 
@@ -81,7 +76,7 @@ const updateVideo = asyncHandler(async (req, res) => {
   try {
     const { videoId } = req.params;
     const { title, description } = req.body;
-    const thumbnailFile = req.file?.path; // Extract thumbnail
+    const thumbnailFile = req.file?.path;
 
     if (!mongoose.Types.ObjectId.isValid(videoId)) {
       throw new ApiError(401, "Invalid video Id");
@@ -103,13 +98,13 @@ const updateVideo = asyncHandler(async (req, res) => {
       if (!thumbnailUploadResponse?.url) {
         throw new ApiError(500, "Failed to upload thumbnail");
       }
-      video.thumbnail = thumbnailUploadResponse.url;
+      video.thumbnailFile = thumbnailUploadResponse.url;
     }
     await video.save();
 
     return res
       .status(200)
-      .json(new ApiResponse(201, "Video updated successfully"));
+      .json(new ApiResponse(200, video, "Video updated successfully"));
   } catch (error) {
     throw new ApiError(500, error?.message || "Error while updating video");
   }
